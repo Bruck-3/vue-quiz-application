@@ -1,26 +1,82 @@
+<script setup>
+import q from '../src/assets/data/quizes.json';
+import { ref } from 'vue';
+const quizes = ref(q)
+</script>
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <div class="container">
+      <header>
+        <h1>Quizes</h1>
+        <input type="text" placeholder="Search...">
+      </header>
+      <div class="options-container">
+        <div v-for="quiz in quizes" :key="quiz.id" class="card">
+          <img :src="quiz.img" alt="">
+          <div class="card-text">
+            <h2>{{quiz.name}}</h2>
+            <p>{{quiz.questions.length}} questions</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld
-  }
+
 }
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<style scoped>
+.container{
+  max-width: 1000px;
+  margin: 0 auto;
+
 }
+header{
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
+}
+header h1 {
+  font-weight: bold;
+    margin-right: 30px;
+}
+header input {
+  border: none;
+  background-color: rgba(128, 128, 128, 0.1);
+  padding: 10px;
+  border-radius: 5px;
+}
+.options-container{
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 40px;
+}
+/* Card */
+.card{
+  width: 310px;
+  overflow: hidden;
+  border-radius: 2%;
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
+  margin-right: 20px;
+  cursor: pointer;
+}
+.card img{
+  width: 100%;
+  height: 190px;
+  margin: 0px;
+}
+.card-text {
+  padding: 0px 5px;
+}
+.card-text h2{
+  font-weight: bold;
+}
+
 </style>
